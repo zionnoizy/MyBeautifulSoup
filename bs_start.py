@@ -1,17 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
+import re
+from lxml.html import fromstring
+import lxml.html as PARSER
+
+with open("fullname.html") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+
+# print (soup)
+
+soup = BeautifulSoup(open("fullname.html"), "lxml")
+
+mydivs = soup.find_all("a", text=True)
 
 
-page = requests.get('https://onsiteselfie.com/admin/project/', auth=('migration@companiesms.co.uk', 'cmsmigration'))
-# soup = BeautifulSoup (page.content)
+
+for i, mydivs in enumerate(mydivs):
+    print (str(i) + ": " + str(mydivs.string))
 
 
-soup = BeautifulSoup(page.content, "lxml") # If this line causes an error, run 'pip install html5lib' or install html5lib
-
-
-# wide-element-container
-mydivs = soup.find_all("div", {"class": "app"})
-
-# print(soup.prettify())
-
-print (mydivs)
+# fullname = soup.find_all("a")
+# print (fullname.string)
